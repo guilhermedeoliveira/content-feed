@@ -3,8 +3,6 @@ import useSWR from 'swr'
 
 import Post from '@/components/Post'
 
-import '@/app/globals.css'
-
 import { getData } from './api/feed'
 
 const fetcher = (url: string) => fetch(url).then((res) => res.json())
