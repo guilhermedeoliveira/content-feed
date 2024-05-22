@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
+import { PostType } from '@/types'
 
 import { formatRelativeTime } from '@/helpers/date'
 import { formatNumber } from '@/helpers/number'
@@ -104,7 +105,15 @@ const CommentLikes = styled.div`
   margin-top: 0.5rem;
 `
 
-const Post = ({ image, author, date, title, subtitle, body, comments }) => {
+const Post = ({
+  image,
+  author,
+  date,
+  title,
+  subtitle,
+  body,
+  comments,
+}: PostType) => {
   const [showComments, setShowComments] = useState<boolean>(false)
 
   const toggleComments = () => {

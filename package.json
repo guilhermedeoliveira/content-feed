@@ -7,6 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
+    "type-check": "tsc --pretty --noEmit",
     "test:unit": "jest",
     "test:unit:w": "jest --watch"
   },

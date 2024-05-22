@@ -1,9 +1,9 @@
 import styled, { createGlobalStyle } from 'styled-components'
-import useSWR from 'swr'
 
 import Post from '@/components/Post'
 
 import { getData } from './api/feed'
+import { ContentCard } from '@/types'
 
 const fetcher = (url: string) => fetch(url).then((res) => res.json())
 
@@ -35,13 +35,12 @@ const GlobalStyle = createGlobalStyle`
  }
 `
 
-const Home = ({ cards }) => {
-  // const { data: cards, error, isLoading } = useSWR('/api/feed', fetcher)
+type HomeProps = {
+  cards: ContentCard[]
+}
 
+const Home = ({ cards }: HomeProps) => {
   console.log('client', { cards })
-
-  // if (isLoading) return <div>Loading...</div>
-  // if (error || !cards) return <div>Failed to load</div>
 
   return (
     <>

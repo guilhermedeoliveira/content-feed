@@ -1,15 +1,9 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 
 import { sortItemsByKeyDescending } from '@/helpers/array'
+import { ContentCard } from '@/types'
 
-type ResponseData = {
-  message: string
-}
-
-export async function getData(
-  req: NextApiRequest,
-  res: NextApiResponse<ResponseData>
-) {
+export async function getData() {
   const response = await fetch(
     'https://stoplight.io/mocks/engine/fullstack-spec/52502230/content',
     {
@@ -29,7 +23,10 @@ export async function getData(
   return sortedCards
 }
 
-export default async function handler(req, res) {
+export default async function handler(
+  req: NextApiRequest,
+  res: NextApiResponse<ContentCard[]>
+) {
   try {
     const jsonData = await getData()
     res.status(200).json(jsonData)
