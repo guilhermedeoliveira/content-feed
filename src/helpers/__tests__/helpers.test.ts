@@ -64,7 +64,5 @@ describe('Helpers', () => {
       const expectedOutput = 'HelloWorld'
       expect(cleanupString(input)).toBe(expectedOutput)
     })
-
-    // Add more test cases as needed
   })
 })

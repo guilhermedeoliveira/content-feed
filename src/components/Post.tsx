@@ -1,12 +1,10 @@
 import React, { useState } from 'react'
-import Image from 'next/image'
 import styled from 'styled-components'
 
 import { formatRelativeTime } from '@/helpers/date'
 import { formatNumber } from '@/helpers/number'
 
 const PostWrapper = styled.div`
-  /* margin: 20px auto; */
   width: 100%;
   padding: 1rem;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
