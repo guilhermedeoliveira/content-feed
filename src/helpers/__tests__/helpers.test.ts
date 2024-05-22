@@ -1,4 +1,3 @@
-import { cleanupString } from '@/helpers/string'
 import { formatNumber } from '@/helpers/number'
 import { formatRelativeTime } from '@/helpers/date'
 import { sortItemsByKeyDescending } from '@/helpers/array'
@@ -31,38 +30,6 @@ describe('Helpers', () => {
       const originalItems = [...items]
       sortItemsByKeyDescending(items, 'metadata.priority')
       expect(items).toEqual(originalItems)
-    })
-  })
-
-  describe(cleanupString, () => {
-    it('should remove all percentage symbols from the input string', () => {
-      const input = 'Hello%World%'
-      const expectedOutput = 'HelloWorld'
-      expect(cleanupString(input)).toBe(expectedOutput)
-    })
-
-    it('should return the same string if there are no percentage symbols', () => {
-      const input = 'HelloWorld'
-      const expectedOutput = 'HelloWorld'
-      expect(cleanupString(input)).toBe(expectedOutput)
-    })
-
-    it('should handle an empty string', () => {
-      const input = ''
-      const expectedOutput = ''
-      expect(cleanupString(input)).toBe(expectedOutput)
-    })
-
-    it('should handle strings with only percentage symbols', () => {
-      const input = '%%%%%'
-      const expectedOutput = ''
-      expect(cleanupString(input)).toBe(expectedOutput)
-    })
-
-    it('should handle strings with mixed characters and percentage symbols', () => {
-      const input = '%H%e%l%l%o%W%o%r%l%d%'
-      const expectedOutput = 'HelloWorld'
-      expect(cleanupString(input)).toBe(expectedOutput)
     })
   })
 })

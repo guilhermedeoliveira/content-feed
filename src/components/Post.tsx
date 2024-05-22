@@ -31,6 +31,7 @@ const Date = styled.div`
 const PostImage = styled.img`
   width: 100%;
   height: 100%;
+  height: 20rem;
   max-height: 22rem;
   border-radius: 8px;
   object-fit: cover;

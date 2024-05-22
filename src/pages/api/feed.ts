@@ -1,42 +1,29 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 
-import { cleanupString } from '@/helpers/string'
 import { sortItemsByKeyDescending } from '@/helpers/array'
-import data from '@/mocks'
 
 type ResponseData = {
   message: string
 }
 
-// export default function handler(
-//   req: NextApiRequest,
-//   res: NextApiResponse<ResponseData>
-// ) {
-//   try {
-//     // const result = await asyncCall()
-
-//     const cleanupData = cleanupString(data)
-//     const parsedData = JSON.parse(cleanupData)
-
-//     const { contentCards: cards } = parsedData
-//     const sortedCards = sortItemsByKeyDescending(cards, 'metadata.priority')
-
-//     res.status(200).json(sortedCards)
-//   } catch (err) {
-//     res.status(500).json({ error: 'failed to load data' })
-//   }
-// }
-
 export async function getData(
   req: NextApiRequest,
   res: NextApiResponse<ResponseData>
 ) {
-  // const result = await asyncCall()
+  const response = await fetch(
+    'https://stoplight.io/mocks/engine/fullstack-spec/52502230/content',
+    {
+      method: 'GET',
+      headers: {
+        Accept: 'application/json',
+        Prefer: 'code=200, dynamic=true',
+      },
+    }
+  )
 
-  const cleanupData = cleanupString(data)
-  const parsedData = JSON.parse(cleanupData)
+  const data = await response.json()
 
-  const { contentCards: cards } = parsedData
+  const { contentCards: cards } = data
   const sortedCards = sortItemsByKeyDescending(cards, 'metadata.priority')
 
   return sortedCards
