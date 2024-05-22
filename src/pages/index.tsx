@@ -1,19 +1,17 @@
 import styled, { createGlobalStyle } from 'styled-components'
 
-import Post from '@/components/Post'
+import Card from '@/modules/feed/components/Card'
 
-import { getData } from './api/feed'
-import { ContentCard } from '@/types'
+import { feedService } from '@/modules/feed/data/service'
+import { ContentCard } from '@/modules/feed/types'
 
-const fetcher = (url: string) => fetch(url).then((res) => res.json())
-
-const PostsList = styled.ul`
+const CardsList = styled.ul`
   list-style: none;
   margin: 0;
   padding: 1rem 0;
 `
 
-const PostItem = styled.li`
+const CardItem = styled.li`
   margin: 0;
   padding: 0;
   list-style: none;
@@ -39,37 +37,35 @@ type HomeProps = {
   cards: ContentCard[]
 }
 
-const Home = ({ cards }: HomeProps) => {
-  console.log('client', { cards })
+const Home = ({ cards }: HomeProps) => (
+  <>
+    <GlobalStyle />
+    <CardsList>
+      {cards.map((c) => (
+        <CardItem key={c.id}>
+          <Card
+            author={`${c.textData.author.first} ${c.textData.author.last}`}
+            date={c.metadata.publishDate}
+            image={c.imageUri}
+            title={c.textData.title}
+            subtitle={c.textData.subTitle}
+            body={c.textData.body}
+            comments={c.comments}
+          />
+        </CardItem>
+      ))}
+    </CardsList>
+  </>
+)
 
-  return (
-    <>
-      <GlobalStyle />
-      <PostsList>
-        {cards.map((c) => (
-          <PostItem key={c.id}>
-            <Post
-              author={`${c.textData.author.first} ${c.textData.author.last}`}
-              date={c.metadata.publishDate}
-              image={c.imageUri}
-              title={c.textData.title}
-              subtitle={c.textData.subTitle}
-              body={c.textData.body}
-              comments={c.comments}
-            />
-          </PostItem>
-        ))}
-      </PostsList>
-    </>
-  )
-}
 export default Home
 
 export async function getServerSideProps() {
-  const jsonData = await getData()
+  const feedData = await feedService()
+
   return {
     props: {
-      cards: jsonData,
+      cards: feedData,
     },
   }
 }

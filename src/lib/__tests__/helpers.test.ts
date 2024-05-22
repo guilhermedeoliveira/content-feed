@@ -1,6 +1,6 @@
-import { sortItemsByKeyDescending } from '@/helpers/array'
-import { formatRelativeTime } from '@/helpers/date'
-import { formatNumber } from '@/helpers/number'
+import { sortItemsByKeyDescending } from '@/lib/array'
+import { formatRelativeTime } from '@/lib/date'
+import { formatNumber } from '@/lib/number'
 
 describe('Helpers', () => {
   describe('Array', () => {
