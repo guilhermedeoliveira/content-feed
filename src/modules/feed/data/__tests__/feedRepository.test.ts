@@ -1,23 +1,270 @@
 import { feedRepository } from '../repository'
-import fetch from 'node-fetch'
 
-jest.mock('node-fetch')
-
-describe('feedRepository integration tests', () => {
-  beforeEach(() => {
-    jest.resetAllMocks()
-  })
-
-  it('should fetch data from the API successfully', async () => {
-    const mockResponse = {
+describe(feedRepository, () => {
+  it('should fetch data from the external API and return it', async () => {
+    global.fetch = jest.fn().mockResolvedValue({
       json: jest.fn().mockResolvedValue({
-        /* mock data */
+        contentCards: [
+          {
+            id: '497f6eca-6276-4993-bfeb-53cbbbba6f08',
+            imageUri: 'https://picsum.photos/500/500',
+            textData: {
+              title: 'string',
+              subTitle: 'string',
+              body: 'stringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringst',
+              author: {
+                first: 'string',
+                last: 'string',
+              },
+            },
+            metadata: {
+              priority: 0,
+              publishDate: '2019-08-24T14:15:22Z',
+            },
+            comments: [
+              {
+                text: 'string',
+                author: 'string',
+                profilePic: 'https://picsum.photos/200',
+                likes: 0,
+              },
+            ],
+          },
+          {
+            id: '497f6eca-6276-4993-bfeb-53cbbbba6f08',
+            imageUri: 'https://picsum.photos/500/500',
+            textData: {
+              title: 'string',
+              subTitle: 'string',
+              body: 'stringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringst',
+              author: {
+                first: 'string',
+                last: 'string',
+              },
+            },
+            metadata: {
+              priority: 0,
+              publishDate: '2019-08-24T14:15:22Z',
+            },
+            comments: [
+              {
+                text: 'string',
+                author: 'string',
+                profilePic: 'https://picsum.photos/200',
+                likes: 0,
+              },
+            ],
+          },
+          {
+            id: '497f6eca-6276-4993-bfeb-53cbbbba6f08',
+            imageUri: 'https://picsum.photos/500/500',
+            textData: {
+              title: 'string',
+              subTitle: 'string',
+              body: 'stringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringst',
+              author: {
+                first: 'string',
+                last: 'string',
+              },
+            },
+            metadata: {
+              priority: 0,
+              publishDate: '2019-08-24T14:15:22Z',
+            },
+            comments: [
+              {
+                text: 'string',
+                author: 'string',
+                profilePic: 'https://picsum.photos/200',
+                likes: 0,
+              },
+            ],
+          },
+          {
+            id: '497f6eca-6276-4993-bfeb-53cbbbba6f08',
+            imageUri: 'https://picsum.photos/500/500',
+            textData: {
+              title: 'string',
+              subTitle: 'string',
+              body: 'stringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringst',
+              author: {
+                first: 'string',
+                last: 'string',
+              },
+            },
+            metadata: {
+              priority: 0,
+              publishDate: '2019-08-24T14:15:22Z',
+            },
+            comments: [
+              {
+                text: 'string',
+                author: 'string',
+                profilePic: 'https://picsum.photos/200',
+                likes: 0,
+              },
+            ],
+          },
+          {
+            id: '497f6eca-6276-4993-bfeb-53cbbbba6f08',
+            imageUri: 'https://picsum.photos/500/500',
+            textData: {
+              title: 'string',
+              subTitle: 'string',
+              body: 'stringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringst',
+              author: {
+                first: 'string',
+                last: 'string',
+              },
+            },
+            metadata: {
+              priority: 0,
+              publishDate: '2019-08-24T14:15:22Z',
+            },
+            comments: [
+              {
+                text: 'string',
+                author: 'string',
+                profilePic: 'https://picsum.photos/200',
+                likes: 0,
+              },
+            ],
+          },
+        ],
       }),
-    }
+    })
 
-    fetch.mockResolvedValue(mockResponse)
+    const result = await feedRepository()
 
-    const data = await feedRepository()
+    expect(result).toEqual({
+      contentCards: [
+        {
+          id: '497f6eca-6276-4993-bfeb-53cbbbba6f08',
+          imageUri: 'https://picsum.photos/500/500',
+          textData: {
+            title: 'string',
+            subTitle: 'string',
+            body: 'stringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringst',
+            author: {
+              first: 'string',
+              last: 'string',
+            },
+          },
+          metadata: {
+            priority: 0,
+            publishDate: '2019-08-24T14:15:22Z',
+          },
+          comments: [
+            {
+              text: 'string',
+              author: 'string',
+              profilePic: 'https://picsum.photos/200',
+              likes: 0,
+            },
+          ],
+        },
+        {
+          id: '497f6eca-6276-4993-bfeb-53cbbbba6f08',
+          imageUri: 'https://picsum.photos/500/500',
+          textData: {
+            title: 'string',
+            subTitle: 'string',
+            body: 'stringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringst',
+            author: {
+              first: 'string',
+              last: 'string',
+            },
+          },
+          metadata: {
+            priority: 0,
+            publishDate: '2019-08-24T14:15:22Z',
+          },
+          comments: [
+            {
+              text: 'string',
+              author: 'string',
+              profilePic: 'https://picsum.photos/200',
+              likes: 0,
+            },
+          ],
+        },
+        {
+          id: '497f6eca-6276-4993-bfeb-53cbbbba6f08',
+          imageUri: 'https://picsum.photos/500/500',
+          textData: {
+            title: 'string',
+            subTitle: 'string',
+            body: 'stringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringst',
+            author: {
+              first: 'string',
+              last: 'string',
+            },
+          },
+          metadata: {
+            priority: 0,
+            publishDate: '2019-08-24T14:15:22Z',
+          },
+          comments: [
+            {
+              text: 'string',
+              author: 'string',
+              profilePic: 'https://picsum.photos/200',
+              likes: 0,
+            },
+          ],
+        },
+        {
+          id: '497f6eca-6276-4993-bfeb-53cbbbba6f08',
+          imageUri: 'https://picsum.photos/500/500',
+          textData: {
+            title: 'string',
+            subTitle: 'string',
+            body: 'stringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringst',
+            author: {
+              first: 'string',
+              last: 'string',
+            },
+          },
+          metadata: {
+            priority: 0,
+            publishDate: '2019-08-24T14:15:22Z',
+          },
+          comments: [
+            {
+              text: 'string',
+              author: 'string',
+              profilePic: 'https://picsum.photos/200',
+              likes: 0,
+            },
+          ],
+        },
+        {
+          id: '497f6eca-6276-4993-bfeb-53cbbbba6f08',
+          imageUri: 'https://picsum.photos/500/500',
+          textData: {
+            title: 'string',
+            subTitle: 'string',
+            body: 'stringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringst',
+            author: {
+              first: 'string',
+              last: 'string',
+            },
+          },
+          metadata: {
+            priority: 0,
+            publishDate: '2019-08-24T14:15:22Z',
+          },
+          comments: [
+            {
+              text: 'string',
+              author: 'string',
+              profilePic: 'https://picsum.photos/200',
+              likes: 0,
+            },
+          ],
+        },
+      ],
+    })
 
     expect(fetch).toHaveBeenCalledWith(
       'https://stoplight.io/mocks/engine/fullstack-spec/52502230/content',
@@ -29,20 +276,13 @@ describe('feedRepository integration tests', () => {
         },
       }
     )
-
-    expect(data).toEqual({
-      /* expected data */
-    })
   })
 
-  it('should handle errors from the API', async () => {
-    const mockResponse = {
-      status: 500,
-      statusText: 'Internal Server Error',
-    }
+  it('should handle API errors gracefully', async () => {
+    global.fetch = jest.fn().mockResolvedValue({
+      json: jest.fn().mockRejectedValue(new Error('API Error')),
+    })
 
-    fetch.mockResolvedValue(mockResponse)
-
-    await expect(feedRepository()).rejects.toThrow('Internal Server Error')
+    await expect(feedRepository()).rejects.toThrow('API Error')
   })
 })

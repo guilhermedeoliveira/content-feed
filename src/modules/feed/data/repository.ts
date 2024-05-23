@@ -1,4 +1,4 @@
-export const feedRepository = async () => {
+export const feedRepository = async (): Promise<any> => {
   const response = await fetch(
     'https://stoplight.io/mocks/engine/fullstack-spec/52502230/content',
     {

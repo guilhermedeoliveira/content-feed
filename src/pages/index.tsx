@@ -5,13 +5,13 @@ import Card from '@/modules/feed/components/Card'
 import { feedService } from '@/modules/feed/data/service'
 import { ContentCard } from '@/modules/feed/types'
 
-const CardsList = styled.ul`
+const PostsList = styled.ul`
   list-style: none;
   margin: 0;
   padding: 1rem 0;
 `
 
-const CardItem = styled.li`
+const PostItem = styled.li`
   margin: 0;
   padding: 0;
   list-style: none;
@@ -34,27 +34,27 @@ const GlobalStyle = createGlobalStyle`
 `
 
 type HomeProps = {
-  cards: ContentCard[]
+  posts: ContentCard[]
 }
 
-const Home = ({ cards }: HomeProps) => (
+const Home = ({ posts }: HomeProps) => (
   <>
     <GlobalStyle />
-    <CardsList>
-      {cards.map((c) => (
-        <CardItem key={c.id}>
+    <PostsList>
+      {posts.map((p) => (
+        <PostItem key={p.id}>
           <Card
-            author={`${c.textData.author.first} ${c.textData.author.last}`}
-            date={c.metadata.publishDate}
-            image={c.imageUri}
-            title={c.textData.title}
-            subtitle={c.textData.subTitle}
-            body={c.textData.body}
-            comments={c.comments}
+            author={`${p.textData.author.first} ${p.textData.author.last}`}
+            date={p.metadata.publishDate}
+            image={p.imageUri}
+            title={p.textData.title}
+            subtitle={p.textData.subTitle}
+            body={p.textData.body}
+            comments={p.comments}
           />
-        </CardItem>
+        </PostItem>
       ))}
-    </CardsList>
+    </PostsList>
   </>
 )
 
@@ -65,7 +65,7 @@ export async function getServerSideProps() {
 
   return {
     props: {
-      cards: feedData,
+      posts: feedData,
     },
   }
 }
