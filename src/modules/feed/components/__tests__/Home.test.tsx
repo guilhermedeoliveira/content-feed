@@ -26,7 +26,7 @@ const posts: ContentCard[] = [
   },
 ]
 
-jest.mock('../modules/feed/data/service', () => ({
+jest.mock('../../data/service', () => ({
   feedService: jest.fn().mockResolvedValue([
     {
       id: 1,
